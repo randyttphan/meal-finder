@@ -90,8 +90,23 @@ function addMealToDOM(meal) {
   `;
 }
 
+//function to generate one random meal
+function randomMeal() {
+  //clear meals and heading
+  mealsElement.innerHTML = "";
+  resultHeading.innerHTML = "";
+
+  fetch(`https://www.themealdb.com/api/json/v1/1/random.php`)
+    .then(response => response.json())
+    .then(data => {
+      const meal = data.meals[0];
+
+      addMealToDOM(meal);
+    });
+}
 //Event Listeners
 submit.addEventListener("submit", searchMeal);
+random.addEventListener("click", randomMeal);
 
 mealsElement.addEventListener("click", e => {
   const mealInfo = e.path.find(item => {
